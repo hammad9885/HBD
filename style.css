@@ -1,0 +1,1193 @@
+/* ==========================================================================
+   EXACT MATCH BIRTHDAY EXPERIENCE — RED, WHITE & BLUSH PINK THEME
+   Fully Responsive Across All Devices (Mobile, Tablet & Desktop)
+   ========================================================================== */
+
+:root {
+  --bg-blush-top: #fff0f4;
+  --bg-blush-bottom: #ffdce5;
+  --crimson-deep: #5e0517;
+  --crimson-main: #8f0822;
+  --crimson-bright: #b80d2f;
+  --crimson-btn-start: #a60a29;
+  --crimson-btn-end: #6e0318;
+  --heading-maroon: #4d0e1d;
+  --text-dark-rose: #5c2835;
+  --text-muted-rose: #8a5562;
+  --white-pure: #ffffff;
+  --pink-soft-pill: #f8d5dd;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-cursive: 'Dancing Script', cursive;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: var(--font-sans);
+  color: var(--text-dark-rose);
+  background: linear-gradient(180deg, var(--bg-blush-top) 0%, #ffe6ed 50%, var(--bg-blush-bottom) 100%);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle Aesthetic Grid Overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(180, 60, 85, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(180, 60, 85, 0.035) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Particle Canvas */
+#particleCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Cherry Blossom Branches */
+.cherry-blossom-tl {
+  position: fixed;
+  top: -6px;
+  left: -6px;
+  width: clamp(120px, 26vw, 200px);
+  pointer-events: none;
+  z-index: 20;
+  filter: drop-shadow(0 4px 10px rgba(164, 19, 60, 0.1));
+}
+
+.cherry-blossom-br {
+  position: fixed;
+  bottom: -4px;
+  right: -4px;
+  width: clamp(125px, 28vw, 185px);
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* ==========================================================================
+   TOP BAR: STEPPER PILL (00 - 07) & MUSIC CIRCLE BUTTON
+   ========================================================================== */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.75rem 0.75rem 0.4rem;
+  pointer-events: none;
+}
+
+.stepper-pill {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(0.12rem, 0.8vw, 0.32rem);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.28rem 0.42rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 25px rgba(150, 20, 45, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  max-width: calc(100vw - 68px);
+}
+
+.step-dot {
+  border: none;
+  background: transparent;
+  color: #9e8289;
+  font-family: var(--font-sans);
+  font-size: clamp(0.62rem, 1.8vw, 0.72rem);
+  font-weight: 500;
+  width: clamp(24px, 6.2vw, 30px);
+  height: clamp(24px, 6.2vw, 30px);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.step-dot.completed {
+  background: var(--pink-soft-pill);
+  color: var(--crimson-main);
+  font-weight: 600;
+}
+
+.step-dot.active {
+  background: radial-gradient(circle at 30% 30%, #b30c2c, #730218);
+  color: var(--white-pure);
+  font-weight: 600;
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(143, 8, 34, 0.42);
+}
+
+/* Music Button Top-Right */
+.music-circle-btn {
+  pointer-events: auto;
+  width: clamp(36px, 8.5vw, 42px);
+  height: clamp(36px, 8.5vw, 42px);
+  border-radius: 50%;
+  background: var(--white-pure);
+  border: none;
+  box-shadow: 0 6px 20px rgba(143, 8, 34, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--crimson-main);
+  font-size: 1.05rem;
+  flex-shrink: 0;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  z-index: 55;
+}
+
+.music-circle-btn:hover {
+  transform: scale(1.07);
+}
+
+.music-circle-btn.playing {
+  box-shadow: 0 0 0 4px rgba(184, 13, 47, 0.16), 0 6px 20px rgba(143, 8, 34, 0.22);
+  animation: gentlePulse 2s infinite;
+}
+
+@keyframes gentlePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   MAIN STAGE & SCREEN TRANSITIONS
+   ========================================================================== */
+.stage-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(3.9rem, 8vh, 5rem) clamp(0.85rem, 3vw, 1.5rem) clamp(3.6rem, 7vh, 4.2rem);
+}
+
+.screen {
+  display: none;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  text-align: center;
+  animation: screenFadeIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.screen.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes screenFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.step-inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Frosted White Rounded Card (Used on Step 01) */
+.frosted-outer-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.74);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 32px;
+  padding: clamp(1.5rem, 4vw, 2.2rem) clamp(1rem, 3.5vw, 1.45rem);
+  box-shadow: 0 18px 45px rgba(160, 20, 50, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ==========================================================================
+   SCREEN L: LOADING SCREEN
+   ========================================================================== */
+.loading-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.heart-loader-ring {
+  position: relative;
+  width: 152px;
+  height: 152px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.85rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 195, 210, 0.45) 0%, rgba(255, 240, 244, 0.1) 70%);
+  box-shadow: 0 14px 35px rgba(180, 20, 50, 0.14);
+}
+
+.ring-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-track {
+  fill: none;
+  stroke: rgba(201, 24, 74, 0.12);
+  stroke-width: 3.5;
+}
+
+.ring-progress {
+  fill: none;
+  stroke: #a10827;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-dasharray: 415;
+  stroke-dashoffset: 415;
+  transition: stroke-dashoffset 0.15s linear;
+}
+
+.orbit-hearts {
+  position: absolute;
+  inset: 0;
+  animation: orbitSpin 3.2s linear infinite;
+}
+
+.mini-orbit-heart {
+  position: absolute;
+  top: 8px;
+  right: 26px;
+  font-size: 1rem;
+}
+
+@keyframes orbitSpin {
+  to { transform: rotate(360deg); }
+}
+
+.center-3d-heart {
+  animation: heartBeat3D 1.3s ease-in-out infinite;
+}
+
+@keyframes heartBeat3D {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.serif-title {
+  font-family: var(--font-serif);
+  color: var(--heading-maroon);
+  font-weight: 700;
+  line-height: 1.22;
+}
+
+.loading-title {
+  font-size: clamp(1.45rem, 5vw, 1.85rem);
+  margin-bottom: 0.65rem;
+}
+
+.loading-sub {
+  font-size: 0.94rem;
+  color: var(--text-muted-rose);
+  margin-bottom: 1.5rem;
+}
+
+.progress-bar-track {
+  width: 82%;
+  max-width: 310px;
+  height: 6px;
+  background: rgba(184, 13, 47, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 0.65rem;
+}
+
+.progress-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #730218, #b80d2f);
+  border-radius: 999px;
+  transition: width 0.1s linear;
+}
+
+.progress-percent {
+  font-size: 0.85rem;
+  color: var(--text-muted-rose);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   COMMON MASCOT CIRCLE, HEADINGS & CRIMSON PILL BUTTON
+   ========================================================================== */
+.mascot-circle {
+  width: clamp(118px, 28vw, 136px);
+  height: clamp(118px, 28vw, 136px);
+  border-radius: 50%;
+  background: var(--white-pure);
+  border: 3px solid #ffd8e2;
+  box-shadow: 0 12px 30px rgba(184, 13, 47, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.35rem;
+  animation: mascotFloat 3.6s ease-in-out infinite alternate;
+}
+
+@keyframes mascotFloat {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-7px); }
+}
+
+.small-caps-label {
+  font-size: clamp(0.72rem, 2.2vw, 0.78rem);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--crimson-main);
+  margin-bottom: 0.6rem;
+}
+
+.main-hero-title {
+  font-size: clamp(2rem, 6.8vw, 2.7rem);
+  margin-bottom: 0.95rem;
+}
+
+.section-heading {
+  font-size: clamp(1.85rem, 6vw, 2.35rem);
+  margin-bottom: 0.55rem;
+}
+
+.emoji-heart {
+  display: inline-block;
+  color: #e61938;
+}
+
+.lead-line-bold {
+  font-size: clamp(0.95rem, 2.8vw, 1.03rem);
+  font-weight: 500;
+  color: #4a1220;
+  margin-bottom: 0.5rem;
+}
+
+.lead-line-soft {
+  font-size: clamp(0.88rem, 2.6vw, 0.95rem);
+  color: var(--text-muted-rose);
+  line-height: 1.56;
+  margin-bottom: 1.65rem;
+}
+
+/* Deep Velvet Crimson Pill Button */
+.crimson-pill-btn {
+  background: linear-gradient(180deg, var(--crimson-btn-start) 0%, var(--crimson-btn-end) 100%);
+  color: var(--white-pure);
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem 2.3rem;
+  font-family: var(--font-sans);
+  font-size: 0.96rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(130, 6, 30, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.crimson-pill-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 28px rgba(130, 6, 30, 0.45);
+}
+
+.outline-pill-btn {
+  background: var(--white-pure);
+  color: var(--crimson-main);
+  border: 1.5px solid rgba(143, 8, 34, 0.3);
+  border-radius: 999px;
+  padding: 0.86rem 1.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.outline-pill-btn:hover {
+  background: #fff0f4;
+}
+
+/* ==========================================================================
+   STEP 01: CALENDAR CARD ("MARK IT FOREVER")
+   ========================================================================== */
+.calendar-card {
+  width: 100%;
+  background: var(--white-pure);
+  border-radius: 24px;
+  padding: clamp(1.15rem, 3.5vw, 1.5rem) clamp(0.85rem, 3vw, 1.2rem);
+  box-shadow: 0 10px 30px rgba(150, 20, 45, 0.06);
+  margin: 0.55rem 0 1.35rem;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-bottom: 1.05rem;
+}
+
+.cal-month {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 4vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--heading-maroon);
+}
+
+.cal-year {
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  color: var(--text-muted-rose);
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 0.7rem;
+}
+
+.calendar-weekdays span {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--crimson-main);
+}
+
+.calendar-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 0.58rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.cal-day {
+  position: relative;
+  width: clamp(30px, 8vw, 36px);
+  height: clamp(30px, 8vw, 36px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(0.8rem, 2.3vw, 0.88rem);
+  color: #6c4953;
+  border-radius: 50%;
+}
+
+.cal-day.special-day {
+  background: radial-gradient(circle at 30% 30%, #b80d2f, #7a031b);
+  color: var(--white-pure);
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(143, 8, 34, 0.38);
+}
+
+.your-day-badge {
+  position: absolute;
+  top: -21px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #590416;
+  color: var(--white-pure);
+  font-size: 0.58rem;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 2px 6px;
+  border-radius: 6px;
+  box-shadow: 0 3px 8px rgba(89, 4, 22, 0.3);
+  pointer-events: none;
+}
+
+.date-numeric-display {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.65rem, 5vw, 1.95rem);
+  color: var(--crimson-main);
+  margin-bottom: 0.2rem;
+}
+
+.date-caption {
+  font-size: 0.9rem;
+  color: var(--text-muted-rose);
+  margin-bottom: 1.4rem;
+}
+
+/* ==========================================================================
+   STEP 02: WISHES FOR YOU STACK
+   ========================================================================== */
+.wishes-sub {
+  margin-bottom: 1.2rem;
+}
+
+.wish-cards-stack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 1.65rem;
+}
+
+.wish-item-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 18px;
+  padding: 1rem 1.15rem;
+  text-align: left;
+  font-size: clamp(0.86rem, 2.5vw, 0.93rem);
+  color: #47212c;
+  line-height: 1.5;
+  box-shadow: 0 6px 20px rgba(160, 20, 50, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.wish-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(160, 20, 50, 0.12);
+}
+
+.wish-heart-icon {
+  color: var(--crimson-main);
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ==========================================================================
+   STEP 03: DEEP CRIMSON ENVELOPE WITH WAX SEAL
+   ========================================================================== */
+.envelope-hint {
+  font-size: 0.95rem;
+  color: var(--crimson-main);
+  font-weight: 500;
+  margin: 0.8rem 0 1.35rem;
+}
+
+.envelope-stage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.85rem;
+  perspective: 1200px;
+}
+
+.crimson-envelope {
+  position: relative;
+  width: 100%;
+  max-width: 355px;
+  height: clamp(205px, 48vw, 235px);
+  border-radius: 12px;
+  background: linear-gradient(160deg, #9e0825 0%, #630114 100%);
+  box-shadow: 0 18px 40px rgba(99, 1, 20, 0.35);
+  cursor: pointer;
+  transition: transform 0.35s ease, margin-top 0.5s ease;
+}
+
+.crimson-envelope.open {
+  margin-top: 120px;
+}
+
+.env-pocket {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background:
+    linear-gradient(31deg, #740218 50%, transparent 50.5%),
+    linear-gradient(-31deg, #83041d 50%, transparent 50.5%);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.env-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 58%;
+  background: linear-gradient(180deg, #c90f33 0%, #990724 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 5;
+  filter: drop-shadow(0 6px 12px rgba(50, 0, 10, 0.35));
+}
+
+.crimson-envelope.open .env-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.env-wax-seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe8b8 0%, #e7ba72 70%, #c89648 100%);
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.wax-heart-icon {
+  color: #6b0417;
+  font-size: 1.12rem;
+}
+
+.crimson-envelope.open .env-wax-seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+  pointer-events: none;
+}
+
+.env-letter-sheet {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 10px;
+  height: 86%;
+  background: #fffafa;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 8px 25px rgba(80, 0, 20, 0.22);
+  border: 1px solid #ffd8e2;
+  z-index: 2;
+  overflow-y: auto;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), height 0.7s ease;
+  text-align: left;
+}
+
+.crimson-envelope.open .env-letter-sheet {
+  transform: translateY(-115px);
+  height: 235px;
+  z-index: 7;
+}
+
+.sheet-greeting {
+  font-family: var(--font-serif);
+  color: var(--crimson-main);
+  font-size: 1.1rem;
+  margin-bottom: 0.45rem;
+}
+
+.letter-sheet-inner p {
+  font-size: 0.8rem;
+  color: #4f202c;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.sheet-sign {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.86rem;
+  color: var(--crimson-main);
+  text-align: right;
+  margin-top: 0.35rem;
+}
+
+/* ==========================================================================
+   STEP 04: SIX LITTLE WISHES — POP SHINING BALLOONS (SCREENSHOTS 1 & 2)
+   ========================================================================== */
+.balloons-sub {
+  margin-bottom: 1.3rem;
+}
+
+.balloons-wish-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: clamp(0.45rem, 2vw, 0.85rem);
+  row-gap: clamp(1.3rem, 4vh, 2.2rem);
+  margin-bottom: 1.85rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.balloon-slot {
+  position: relative;
+  width: 100%;
+  min-height: clamp(140px, 32vw, 175px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* 3D Glossy Shining Balloon */
+.shining-balloon {
+  position: relative;
+  width: clamp(72px, 20vw, 94px);
+  height: clamp(90px, 25vw, 116px);
+  border-radius: 50% 50% 50% 50% / 44% 44% 56% 56%;
+  cursor: pointer;
+  box-shadow:
+    inset -10px -12px 22px rgba(35, 0, 10, 0.32),
+    0 14px 24px rgba(130, 10, 35, 0.22);
+  animation: balloonBob 3.4s ease-in-out infinite alternate;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+  z-index: 2;
+}
+
+.balloon-slot:nth-child(even) .shining-balloon {
+  animation-delay: -1.6s;
+}
+
+.shining-balloon:hover {
+  transform: scale(1.07) translateY(-4px);
+}
+
+/* Glossy White Highlight Oval on Top-Left of Balloon */
+.balloon-shine {
+  position: absolute;
+  top: 16%;
+  left: 18%;
+  width: 17%;
+  height: 28%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.42);
+  transform: rotate(24deg);
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+/* 6 Rich Shades of Rose, Pink, Crimson & Ruby (Matching Image 1) */
+.tone-rose {
+  background: radial-gradient(circle at 35% 30%, #ff7597 0%, #df365d 55%, #991130 100%);
+}
+.tone-bright-pink {
+  background: radial-gradient(circle at 35% 30%, #ff6b8b 0%, #d9264e 58%, #8f0b29 100%);
+}
+.tone-deep-crimson {
+  background: radial-gradient(circle at 35% 30%, #c9183b 0%, #80031b 60%, #42000b 100%);
+}
+.tone-soft-pink {
+  background: radial-gradient(circle at 35% 30%, #ff8fa8 0%, #e04b6c 58%, #9c1d39 100%);
+}
+.tone-ruby {
+  background: radial-gradient(circle at 35% 30%, #e01b42 0%, #9e0422 58%, #54000f 100%);
+}
+.tone-warm-rose {
+  background: radial-gradient(circle at 35% 30%, #ff6e8e 0%, #cf2549 58%, #820923 100%);
+}
+
+/* Thin Hanging String Below Balloon / Wish Card */
+.balloon-string {
+  width: 1px;
+  height: clamp(32px, 7vw, 44px);
+  background: linear-gradient(180deg, rgba(120, 40, 60, 0.42) 0%, rgba(120, 40, 60, 0.05) 100%);
+  margin-top: 2px;
+}
+
+/* White Cursive Wish Card (Hidden until balloon is popped) */
+.popped-wish-card {
+  display: none;
+  width: 100%;
+  min-height: clamp(86px, 22vw, 108px);
+  background: var(--white-pure);
+  border-radius: 18px;
+  padding: clamp(0.55rem, 2vw, 0.8rem) clamp(0.35rem, 1.5vw, 0.6rem);
+  box-shadow: 0 10px 24px rgba(150, 20, 45, 0.1);
+  border: 1px solid rgba(255, 220, 230, 0.8);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  animation: wishPopReveal 0.4s cubic-bezier(0.18, 1.25, 0.4, 1) forwards;
+}
+
+.popped-wish-card p {
+  font-family: var(--font-cursive);
+  font-size: clamp(0.84rem, 2.7vw, 1.04rem);
+  font-weight: 600;
+  color: #5c1929;
+  line-height: 1.28;
+}
+
+.balloon-slot.popped .shining-balloon {
+  display: none;
+}
+
+.balloon-slot.popped .popped-wish-card {
+  display: flex;
+}
+
+@keyframes balloonBob {
+  0% { transform: translateY(0px) rotate(-1.5deg); }
+  100% { transform: translateY(-6px) rotate(1.5deg); }
+}
+
+@keyframes wishPopReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==========================================================================
+   STEP 05: OUR MEMORIES 2x2 GRID & LIGHTBOX MODAL (SCREENSHOTS 3 & 4)
+   ========================================================================== */
+.memories-sub {
+  margin-bottom: 1.25rem;
+}
+
+.our-memories-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.65rem, 2.5vw, 1rem);
+  margin-bottom: 1.75rem;
+}
+
+.memory-art-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(110, 10, 30, 0.16);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #4a1525;
+}
+
+.memory-art-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 34px rgba(110, 10, 30, 0.25);
+}
+
+.mem-svg-holder {
+  width: 100%;
+  height: 100%;
+}
+
+.mem-svg-holder svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.memory-card-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1.6rem 0.5rem 0.65rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(75, 10, 24, 0.88) 75%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+}
+
+.memory-cursive-caption {
+  font-family: var(--font-cursive);
+  color: var(--white-pure);
+  font-size: clamp(0.92rem, 3vw, 1.12rem);
+  line-height: 1.22;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+}
+
+/* Fullscreen Memory Lightbox Modal (Screenshot 4) */
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 180;
+  background: rgba(58, 12, 24, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  animation: screenFadeIn 0.3s ease;
+}
+
+.lightbox-content {
+  width: 100%;
+  max-width: 410px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-card-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 22px;
+  overflow: visible;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.lightbox-art-slot {
+  width: 100%;
+  height: 100%;
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+.lightbox-art-slot svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.lightbox-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: var(--white-pure);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.lightbox-nav-arrow:hover {
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.prev-arrow {
+  left: -14px;
+}
+
+.next-arrow {
+  right: -14px;
+}
+
+.lightbox-cursive-caption {
+  font-family: var(--font-cursive);
+  color: var(--white-pure);
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+  margin-top: 1.15rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   STEP 06: 3D HEART CONSTELLATION CANVAS (SCREENSHOT 5)
+   ========================================================================== */
+.constellation-sub {
+  margin-bottom: 0.45rem;
+}
+
+.constellation-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+}
+
+#constellationCanvas {
+  width: 100%;
+  max-width: 350px;
+  height: clamp(250px, 38vh, 330px);
+  cursor: grab;
+  touch-action: none;
+}
+
+#constellationCanvas:active {
+  cursor: grabbing;
+}
+
+.finale-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+/* ==========================================================================
+   CUSTOMIZE FLOATING BUTTON & MODAL
+   ========================================================================== */
+.customize-fab {
+  position: fixed;
+  bottom: 0.85rem;
+  left: 0.85rem;
+  z-index: 60;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(8px);
+  color: var(--crimson-main);
+  border: 1px solid rgba(143, 8, 34, 0.2);
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(143, 8, 34, 0.1);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(60, 5, 18, 0.45);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-box {
+  background: var(--white-pure);
+  width: 100%;
+  max-width: 400px;
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 50px rgba(80, 0, 20, 0.25);
+}
+
+.modal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.modal-top h3 {
+  font-family: var(--font-serif);
+  color: var(--heading-maroon);
+  font-size: 1.3rem;
+}
+
+.close-x {
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  color: var(--text-muted-rose);
+  cursor: pointer;
+}
+
+#editForm label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-dark-rose);
+  margin-bottom: 0.85rem;
+}
+
+#editForm input {
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #f0c2cd;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  background: #fff9fb;
+}
+
+.date-inputs-row {
+  display: grid;
+  grid-template-columns: 65px 1fr 85px;
+  gap: 0.45rem;
+}
+
+.modal-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+/* ==========================================================================
+   EXTRA RESPONSIVE MEDIA QUERIES (SMALL MOBILE TO LARGE DESKTOP)
+   ========================================================================== */
+@media (max-width: 360px) {
+  .balloons-wish-grid {
+    column-gap: 0.35rem;
+  }
+
+  .popped-wish-card p {
+    font-size: 0.78rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .screen {
+    max-width: 470px;
+  }
+}
